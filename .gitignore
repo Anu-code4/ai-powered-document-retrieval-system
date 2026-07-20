@@ -1,0 +1,43 @@
+
+
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Python cache
+.pytest_cache/
+.mypy_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# FAISS index (optional)
+*.bin
+
+# Evaluation results
+evaluation_results.csv

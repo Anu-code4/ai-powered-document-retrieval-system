@@ -1,0 +1,62 @@
+[
+    {
+        "question": "What is chunking?",
+        "expected_answer": "Chunking is the process of splitting large documents into smaller pieces called chunks.",
+        "generated_answer": "Based on the retrieved context, chunking is an offline preprocessing step in a RAG architecture that involves splitting large, unstructured documents into smaller, readable segments called chunks. This process helps to index these chunks in a vector database for efficient retrieval.",
+        "contexts": [
+            "confusion between chunking and context\nChunking and Context are related but distinct parts of a RAG architecture.\nChunking is an offline preprocessing step. It is the strategy of splitting large, unstructured documents into smaller, readable segments—called chunks—so they can be indexed in a vector database.",
+            "What is the QA Head in BERT Question Answering?",
+            "In a production RAG system, why do we use chunk overlap, and what exactly breaks if overlap is set to zero?\nChunk overlap is used to ensure continuity of semantic information across chunk boundaries. Without overlap, important entities, phrases, or relationships that span two chunks may get split, causing the embedding of each chunk to lose critical context. This leads to reduced retrieval recall because queries matching boundary-spanning concepts may not find a sufficiently similar chunk.",
+            "What is a standalone question in conversational RAG?\nA standalone question is a self-contained question that includes all the necessary context to be understood independently, without relying on previous conversation history. Query rewriting converts follow-up questions into standalone questions before retrieval, improving retrieval accuracy.\nWhat is a Data Contract?\nA data contract is simply an agreement between two modules about the format of the data they exchange.",
+            "Missing chunk overlap-Without overlap, important information may be split across two chunks. Neither chunk alone contains the complete answer."
+        ]
+    },
+    {
+        "question": "What is FAISS?",
+        "expected_answer": "FAISS is a vector database library used for efficient similarity search.",
+        "generated_answer": "Based on the retrieved context, I don't know based on the provided documents.",
+        "contexts": [
+            "What is stored inside a FAISS vector database?\nFAISS stores one fixed-dimensional embedding vector for each chunk of text. Each chunk may contain one or multiple sentences, but after the embedding model applies pooling, the entire chunk is represented by a single embedding vector. During retrieval, the query is also converted into one embedding vector, and FAISS compares the query vector with all stored chunk vectors to find the most semantically similar chunks.",
+            "What is the QA Head in BERT Question Answering?",
+            "Why use a distance threshold after FAISS retrieval?\nFAISS always returns the nearest neighbors, even if they're poor matches. A distance threshold filters out results that are too dissimilar to the query, reducing the chance of irrelevant context being passed to the LLM.",
+            "The optimal number of retrieved chunks depends on the query, the document structure, and the available context window. Retrieving too few chunks can omit important information, while retrieving too many increases cost, latency, and irrelevant context. Production systems often adapt retrieval dynamically based on similarity scores, token budgets, or query characteristics.\nS\nWhy do we load the JSON file for BM25 instead of querying FAISS?",
+            "Think of it as a handshake.\nRetriever  ───────────────►  Hybrid Retriever\n            \"I promise to return data in this format.\"\nHybrid Retriever ─────────►  Generator\n            \"I know exactly what format I'll receive.\"\nIf both sides follow the contract, the system works smoothly.\nWhy use RRF instead of normalizing scores?\"\nFAISS distance and BM25 score are different kinds of values. \nTheir scales and meanings are different. \nNormalizing them can be unreliable."
+        ]
+    },
+    {
+        "question": "What are embeddings?",
+        "expected_answer": "Embeddings are numerical vector representations of text that capture semantic meaning.",
+        "generated_answer": "Based on the retrieved context, embeddings are dense, low-dimensional vector representations that capture semantic meaning and context. They learn to represent text tokens in a way that captures their semantic relationships.",
+        "contexts": [
+            "How does Sentence Transformer generate embeddings?",
+            "maps explicit categories to rigid numerical structures, it differs from Embeddings, which learn dense, low-dimensional vector representations that capture semantic meaning and context.\"",
+            "Explain specifically why the query and documents are converted into embeddings before retrieval.",
+            "What are these, and why do we need the attention mask?\n\"The first tensor represents input_ids, which are the numerical mappings of text tokens generated by a tokenizer so a model can process them.",
+            "into a single 384-dimensional sentence embedding. This final sentence embedding is what is stored in a vector database and used for semantic similarity search in RAG systems."
+        ]
+    },
+    {
+        "question": "What is BM25?",
+        "expected_answer": "BM25 is a keyword-based ranking algorithm used for information retrieval.",
+        "generated_answer": "Based on the retrieved context, BM25 stands for Best Match 25, which is a sparse retrieval method that preserves exact token occurrences and term-frequency statistics, making it highly reliable for cases where high precision is required and false positives are costly. It does not require embedding generation and can be cheaper to maintain at scale compared to other methods like FAISS.",
+        "contexts": [
+            "Sparse retrieval can also be advantageous when high precision is required and false positives are costly, such as legal, compliance, medical, or log-analysis systems.\nFrom an operational perspective, BM25 is simpler to deploy, easier to explain, does not require embedding generation, and can be cheaper to maintain at scale.",
+            "What is the QA Head in BERT Question Answering?",
+            "Sparse retrieval methods such as BM25 preserve exact token occurrences and term-frequency statistics, making them highly reliable for these cases.\nAnother edge case is rapidly changing domains. If a new product name or internal project code appears today, BM25 can retrieve it immediately because it does not depend on the embedding model having learned a representation for that term.",
+            "What is a standalone question in conversational RAG?\nA standalone question is a self-contained question that includes all the necessary context to be understood independently, without relying on previous conversation history. Query rewriting converts follow-up questions into standalone questions before retrieval, improving retrieval accuracy.\nWhat is a Data Contract?\nA data contract is simply an agreement between two modules about the format of the data they exchange.",
+            "The optimal number of retrieved chunks depends on the query, the document structure, and the available context window. Retrieving too few chunks can omit important information, while retrieving too many increases cost, latency, and irrelevant context. Production systems often adapt retrieval dynamically based on similarity scores, token budgets, or query characteristics.\nS\nWhy do we load the JSON file for BM25 instead of querying FAISS?"
+        ]
+    },
+    {
+        "question": "What is a hybrid retriever?",
+        "expected_answer": "A hybrid retriever combines semantic search and keyword search.",
+        "generated_answer": "Based on the provided context, I can explain that a hybrid retriever combines dense retrieval with sparse retrieval methods such as BM25. Dense retrieval captures semantic meaning, while sparse retrieval rewards exact keyword matches. By combining both scores, the system can retrieve documents that are both semantically relevant and contain important exact terms, improving recall and ranking of the correct chunk.",
+        "contexts": [
+            "In a production RAG system, suppose a user asks:\"What is the notice period policy for employees?\"Your vector database retrieves 5 chunks. Four chunks are semantically related to employee policies, but one chunk contains the exact phrase \"notice period policy\" and is actually the correct answer.Why might a dense retriever rank the incorrect chunks above the correct one, and how can a hybrid retrieval approach help in this situation?",
+            "Think of it as a handshake.\nRetriever  ───────────────►  Hybrid Retriever\n            \"I promise to return data in this format.\"\nHybrid Retriever ─────────►  Generator\n            \"I know exactly what format I'll receive.\"\nIf both sides follow the contract, the system works smoothly.\nWhy use RRF instead of normalizing scores?\"\nFAISS distance and BM25 score are different kinds of values. \nTheir scales and meanings are different. \nNormalizing them can be unreliable.",
+            "Hybrid retrieval combines dense retrieval with sparse retrieval methods such as BM25. Sparse retrieval rewards exact keyword matches, while dense retrieval captures semantic meaning. By combining both scores, the system can retrieve documents that are both semantically relevant and contain important exact terms, improving recall and ranking of the correct chunk.",
+            "What is a standalone question in conversational RAG?\nA standalone question is a self-contained question that includes all the necessary context to be understood independently, without relying on previous conversation history. Query rewriting converts follow-up questions into standalone questions before retrieval, improving retrieval accuracy.\nWhat is a Data Contract?\nA data contract is simply an agreement between two modules about the format of the data they exchange.",
+            "How do you determine how many documents to retrieve in a RAG system?"
+        ]
+    }
+]
