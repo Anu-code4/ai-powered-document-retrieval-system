@@ -1,25 +1,16 @@
-
-
 name: AI Revision Companion CI
 
 on:
   push:
-    branches:
-      - main
-      - master
-
+    branches: [main]
   pull_request:
-    branches:
-      - main
-      - master
+    branches: [main]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -33,8 +24,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Show Environment
+        run: |
+          pwd
+          ls -la
+          python --version
+          python -c "import os; print(os.getcwd())"
+          python -c "import sys; print(sys.path)"
+
       - name: Run Tests
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          pytest
+          python -m pytest tests -v
