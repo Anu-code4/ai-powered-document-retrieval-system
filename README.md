@@ -175,7 +175,19 @@ AI-Powered-Document-Retrieval-System/
 └── README.md
 ```
 
+## Screenshots
 
+### Streamlit Interface
+
+![Streamlit Home](screenshots/streamlit_home.png)
+
+### Chat Interface
+
+![Chat Interface](screenshots/chat_interface.png)
+
+### FastAPI Swagger UI
+
+![Swagger UI](screenshots/swagger_ui.png)
 
 
 
