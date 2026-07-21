@@ -1,6 +1,11 @@
 # AI-Powered Document Retrieval System
 
-> A production-ready Retrieval-Augmented Generation (RAG) system for intelligent document retrieval, semantic search, reranking, and question answering using Hybrid Search, Cross-Encoder Reranking, FastAPI, Streamlit, and Ollama.
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+![Docker](https://img.shields.io/badge/Docker-Container-blue)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-success)
+
+A production-ready Retrieval-Augmented Generation (RAG) system that enables intelligent document retrieval and question answering using Hybrid Search (FAISS + BM25), Cross-Encoder Reranking, FastAPI, Streamlit, and Ollama.
 
 ---
 
@@ -256,3 +261,80 @@ streamlit run frontend/streamlit_app.py
 ```
 
 The application will open automatically in your browser.
+
+
+
+---
+
+## Run with Docker
+
+Build and start the application:
+
+```bash
+docker-compose up --build
+```
+
+Stop the application:
+
+```bash
+docker-compose down
+```
+
+
+
+
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/` | Health check |
+| POST | `/chat` | Ask questions about uploaded documents |
+
+
+
+---
+
+## Project Highlights
+
+- Production-ready Retrieval-Augmented Generation (RAG) system
+- Hybrid Retrieval using FAISS and BM25
+- Cross-Encoder Reranking for improved retrieval accuracy
+- Query Rewriting for follow-up questions
+- Conversation Memory for contextual interactions
+- FastAPI REST API
+- Interactive Streamlit frontend
+- Dockerized deployment
+- GitHub Actions CI pipeline
+- Modular and scalable architecture
+
+
+
+---
+
+## Screenshots
+
+
+
+
+---
+
+## Future Enhancements
+
+- User authentication and authorization
+- Cloud vector database integration
+- Multi-user document collections
+- Streaming LLM responses
+- Support for additional LLM providers
+- Advanced metadata filtering
+- Support for more document formats
+
+
+---
+## Author
+
+**Anukriti Krishna**
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
